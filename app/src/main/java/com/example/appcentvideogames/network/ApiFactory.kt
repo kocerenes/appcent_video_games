@@ -10,7 +10,7 @@ interface ApiFactory {
     // games?key=cb3f44f97104493aadd2deaee997b33a
 
     @GET("games")
-    fun getGames(
+    fun getData(
         @Query("key") apiKey: String
     ): GameResponse
 

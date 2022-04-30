@@ -9,7 +9,9 @@ import androidx.fragment.app.viewModels
 import com.example.appcentvideogames.R
 import com.example.appcentvideogames.base.BaseFragment
 import com.example.appcentvideogames.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint // hilt için
 class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
     FragmentHomeBinding::inflate
 ) {
