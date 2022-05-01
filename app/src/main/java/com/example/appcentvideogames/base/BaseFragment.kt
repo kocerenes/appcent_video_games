@@ -14,7 +14,7 @@ import java.lang.IllegalArgumentException
 
 abstract class BaseFragment<VB: ViewBinding, VM: ViewModel>(
     //viewbindingin bağlama fonksiyonunu çalıştırabilmek için parametre olarak inflater vermemiz gerek
-    private val viewBindingInflater: (inflater: LayoutInflater) -> VB
+    private val bindingInflater: (inflater: LayoutInflater) -> VB
 ): Fragment() {
 
     private var _binding : VB? = null
@@ -31,7 +31,7 @@ abstract class BaseFragment<VB: ViewBinding, VM: ViewModel>(
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = viewBindingInflater.invoke(inflater)
+        _binding = bindingInflater.invoke(inflater)
         if(_binding == null){
             throw IllegalArgumentException("binding NULL!")
         }
@@ -41,18 +41,16 @@ abstract class BaseFragment<VB: ViewBinding, VM: ViewModel>(
 
     //view creted olduğunda ilgili fonksiyonları çalıştıracağız
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        super.onViewCreated(view, savedInstanceState)
         onCreateFinished()
         initializeListener()
         observeEvents()
-
-        super.onViewCreated(view, savedInstanceState)
     }
 
     //memory'i etkin kullanmak için (viewbinding)
     override fun onDestroy() {
-        _binding= null
         super.onDestroy()
+        _binding= null
     }
 
 }

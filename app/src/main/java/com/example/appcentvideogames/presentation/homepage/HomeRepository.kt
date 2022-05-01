@@ -9,6 +9,7 @@ class HomeRepository @Inject constructor(private val apiFactory: ApiFactory) : B
     suspend fun getData(
         apiKey: String
     ) = safeApiRequest {
+        println("repository getdata")
         apiFactory.getData(apiKey)
     }
 

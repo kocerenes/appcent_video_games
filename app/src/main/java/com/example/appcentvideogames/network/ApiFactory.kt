@@ -10,8 +10,14 @@ interface ApiFactory {
     // games?key=cb3f44f97104493aadd2deaee997b33a
 
     @GET("games")
-    fun getData(
+    suspend fun getData(
         @Query("key") apiKey: String
     ): GameResponse
+
+    /*@GET("v1/cryptocurrency/listings/latest")
+    suspend fun getData(
+        @Header("X-CMC_PRO_API_KEY") apiKey:String,
+        @Query("limit") limit : String
+    ): CryptoResponse*/
 
 }

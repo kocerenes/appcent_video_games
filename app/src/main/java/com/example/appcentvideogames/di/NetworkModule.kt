@@ -1,6 +1,6 @@
 package com.example.appcentvideogames.di
 
-import androidx.viewbinding.BuildConfig
+import androidx.databinding.ktx.BuildConfig
 import com.example.appcentvideogames.network.ApiFactory
 import com.example.appcentvideogames.utils.Constants.BASE_URL
 import dagger.Module

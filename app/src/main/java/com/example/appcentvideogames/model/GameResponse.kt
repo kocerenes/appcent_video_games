@@ -1,5 +1,8 @@
 package com.example.appcentvideogames.model
 
+import com.google.gson.annotations.SerializedName
+
 data class GameResponse(
-    val result: List<Game>
+    @SerializedName("results")
+    val results: List<Game>?
 )
