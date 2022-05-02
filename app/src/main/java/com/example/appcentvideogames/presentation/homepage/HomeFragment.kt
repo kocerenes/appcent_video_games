@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.example.appcentvideogames.R
 import com.example.appcentvideogames.base.BaseFragment
 import com.example.appcentvideogames.databinding.FragmentHomeBinding
@@ -24,6 +25,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
 ) {
     //view model'ı tanımla
     override val viewModel by viewModels<HomeViewModel>()
+    //ilk 3 oyun
+   // private val topThreeGame = arrayListOf<Game>()
 
     override fun onCreateFinished() {
         Log.e("dene","oncreat")
@@ -40,8 +43,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
     override fun observeEvents() {
 
         with(viewModel){
+
+
             gameResponse.observe(viewLifecycleOwner, Observer {
+
                 it?.let {
+                    //it.results?.let { it2 -> addTopThreeGame(it2) }
                     it.results?.let { it1 -> setRecycler(it1) }
                 }
             })
@@ -56,7 +63,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
     private fun setRecycler(data:List<Game>){
         val mAdapter = HomeRecyclerAdapter(object : ItemClickListener{
             override fun onItemClick(game: Game) {
-
+                if (game.id != null){
+                    val navigation = HomeFragmentDirections.actionHomeFragmentToDetailFragment(game.id)
+                    Navigation.findNavController(requireView()).navigate(navigation)
+                }
             }
         })
         binding.rvHome.adapter = mAdapter
@@ -65,7 +75,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
 
     private fun handleViews(isLoading : Boolean = false){
         binding.rvHome.isVisible = !isLoading
-
     }
+
+    //ilk 3 oyunu al
+    /*private fun addTopThreeGame(data:List<Game>){
+        topThreeGame.add(data[0])
+        topThreeGame.add(data[1])
+        topThreeGame.add(data[2])
+    }*/
 
 }
