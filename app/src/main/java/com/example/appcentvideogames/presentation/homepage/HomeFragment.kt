@@ -1,20 +1,20 @@
 package com.example.appcentvideogames.presentation.homepage
 
-import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
-import com.example.appcentvideogames.R
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.appcentvideogames.base.BaseFragment
 import com.example.appcentvideogames.databinding.FragmentHomeBinding
 import com.example.appcentvideogames.model.Game
-import com.example.appcentvideogames.model.GameResponse
+import com.example.appcentvideogames.presentation.homepage.listener.ItemClickListener
+import com.example.appcentvideogames.presentation.homepage.listener.viewPagerListener
 import com.example.appcentvideogames.utils.Constants.API_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +30,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
 
     private lateinit var recyclerAdapter: HomeRecyclerAdapter
     //private val games = arrayListOf<Game>()
+    private lateinit var viewPagerAdapter: GameViewPagerAdapter
+    private lateinit var viewPager2: ViewPager2
 
 
     override fun onCreateFinished() {
@@ -53,6 +55,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
                     //it.results?.let { it2 -> addTopThreeGame(it2) }
                     it.results?.let { it1 -> setRecycler(it1) }
                     it.results?.let { it2 -> setSearchView(it2) }
+                    it.results?.let { it3 -> setViewPager(it3) }
+                    println("observe event")
                 }
             })
 
@@ -63,7 +67,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
     }
 
     private fun setRecycler(data:List<Game>){
-        recyclerAdapter = HomeRecyclerAdapter(object : ItemClickListener{
+        recyclerAdapter = HomeRecyclerAdapter(object : ItemClickListener {
             override fun onItemClick(game: Game) {
                 if (game.id != null){
                     val navigation = HomeFragmentDirections.actionHomeFragmentToDetailFragment(game.id)
@@ -79,6 +83,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
                     binding.constraintLayout.visibility = View.GONE
                 }
             }
+        })
+
+        viewPagerAdapter = GameViewPagerAdapter(object : viewPagerListener {
+            override fun onItemClickedViewPager(game: Game) {
+                if (game.id != null){
+                    val navigation = HomeFragmentDirections.actionHomeFragmentToDetailFragment(game.id)
+                    Navigation.findNavController(requireView()).navigate(navigation)
+                }
+            }
+
         })
         binding.rvHome.adapter = recyclerAdapter
         recyclerAdapter.setList(data)
@@ -106,15 +120,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
         })
     }
 
-    private fun handleViews(isLoading : Boolean = false){
-        binding.rvHome.isVisible = !isLoading
+    private fun setViewPager(games: List<Game>){
+        var topThreeGame = ArrayList<Game>()
+        var newThreeGame = addTopThreeGame(games,topThreeGame)
+        initViewPager(newThreeGame)
+        println("setViewPAger")
+
     }
 
     //ilk 3 oyunu al
-    /*private fun addTopThreeGame(data:List<Game>){
+    private fun addTopThreeGame(data:List<Game>,topThreeGame: ArrayList<Game>): ArrayList<Game>{
         topThreeGame.add(data[0])
         topThreeGame.add(data[1])
         topThreeGame.add(data[2])
-    }*/
+        println("addTopThreeGame")
+        return topThreeGame
+    }
+
+    //viewpager'ı kur
+    private fun initViewPager(newThreeGame: ArrayList<Game>){
+        viewPager2 = binding.vp2Home
+        viewPager2.offscreenPageLimit = 3
+        viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        viewPagerAdapter.setList(newThreeGame)
+        viewPager2.adapter = viewPagerAdapter
+        println("initViewPager")
+    }
+
+
+    private fun handleViews(isLoading : Boolean = false){
+        binding.rvHome.isVisible = !isLoading
+    }
 
 }

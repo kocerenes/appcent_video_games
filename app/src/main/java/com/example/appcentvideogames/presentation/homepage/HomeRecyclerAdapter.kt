@@ -7,6 +7,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appcentvideogames.databinding.HomeRecyclerRowBinding
 import com.example.appcentvideogames.model.Game
+import com.example.appcentvideogames.presentation.homepage.listener.ItemClickListener
 
 class HomeRecyclerAdapter(private val listener: ItemClickListener): RecyclerView.Adapter<HomeRecyclerAdapter.MViewHolder>(), Filterable {
 
