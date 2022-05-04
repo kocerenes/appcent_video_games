@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/enes/AndroidStudioProjects/AppcentVideoGames/app/src/main/res/drawable/ic_bottom_menu_fav.xml" value="0.2703125" />
         <entry key="..\:/Users/enes/AndroidStudioProjects/AppcentVideoGames/app/src/main/res/drawable/ic_favorite_border.xml" value="0.2703125" />
         <entry key="..\:/Users/enes/AndroidStudioProjects/AppcentVideoGames/app/src/main/res/layout/activity_main.xml" value="0.2509057971014493" />
         <entry key="..\:/Users/enes/AndroidStudioProjects/AppcentVideoGames/app/src/main/res/layout/fragment_detail.xml" value="0.164" />
@@ -10,6 +11,8 @@
         <entry key="..\:/Users/enes/AndroidStudioProjects/AppcentVideoGames/app/src/main/res/layout/games_vp_cardview.xml" value="0.24230072463768115" />
         <entry key="..\:/Users/enes/AndroidStudioProjects/AppcentVideoGames/app/src/main/res/layout/home_recycler_row.xml" value="0.1" />
         <entry key="..\:/Users/enes/AndroidStudioProjects/AppcentVideoGames/app/src/main/res/layout/vp_cardview.xml" value="0.24230072463768115" />
+        <entry key="..\:/Users/enes/AndroidStudioProjects/AppcentVideoGames/app/src/main/res/layout/vp_imageview.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/enes/AndroidStudioProjects/AppcentVideoGames/app/src/main/res/menu/bottom_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/enes/AndroidStudioProjects/AppcentVideoGames/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
