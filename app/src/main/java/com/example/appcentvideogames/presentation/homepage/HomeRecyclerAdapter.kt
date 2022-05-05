@@ -9,7 +9,8 @@ import com.example.appcentvideogames.databinding.HomeRecyclerRowBinding
 import com.example.appcentvideogames.model.Game
 import com.example.appcentvideogames.presentation.homepage.listener.ItemClickListener
 
-class HomeRecyclerAdapter(private val listener: ItemClickListener): RecyclerView.Adapter<HomeRecyclerAdapter.MViewHolder>(), Filterable {
+class HomeRecyclerAdapter(private val listener: ItemClickListener) :
+    RecyclerView.Adapter<HomeRecyclerAdapter.MViewHolder>(), Filterable {
 
     private var games = ArrayList<Game>()
 

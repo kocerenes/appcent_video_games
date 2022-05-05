@@ -14,7 +14,7 @@ import com.example.appcentvideogames.base.BaseFragment
 import com.example.appcentvideogames.databinding.FragmentHomeBinding
 import com.example.appcentvideogames.model.Game
 import com.example.appcentvideogames.presentation.homepage.listener.ItemClickListener
-import com.example.appcentvideogames.presentation.homepage.listener.viewPagerListener
+import com.example.appcentvideogames.presentation.homepage.listener.ViewPagerListener
 import com.example.appcentvideogames.utils.Constants.API_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,12 +24,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
 ) {
     //view model'ı tanımla
     override val viewModel by viewModels<HomeViewModel>()
-    //ilk 3 oyun
-   // private val topThreeGame = arrayListOf<Game>()
-    //private lateinit var searchView: SearchView
 
     private lateinit var recyclerAdapter: HomeRecyclerAdapter
-    //private val games = arrayListOf<Game>()
+
+    //viewpager
     private lateinit var viewPagerAdapter: GameViewPagerAdapter
     private lateinit var viewPager2: ViewPager2
 
@@ -39,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
         viewModel.getData(API_KEY)
     }
 
-    //tıklama listenerlarını yazacağımız fonksiyon
+    //tıklama listenerlarını yazacağım fonksiyon
     override fun initializeListener() {
 
     }
@@ -52,11 +50,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
             gameResponse.observe(viewLifecycleOwner, Observer {
 
                 it?.let {
-                    //it.results?.let { it2 -> addTopThreeGame(it2) }
                     it.results?.let { it1 -> setRecycler(it1) }
                     it.results?.let { it2 -> setSearchView(it2) }
                     it.results?.let { it3 -> setViewPager(it3) }
-                    println("observe event")
                 }
             })
 
@@ -76,7 +72,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
             }
 
             override fun onFilteredNameOfGame(nameLength: Int) {
-                if (nameLength == 0) {
+                if (nameLength == 0 && nameLength == null) {
                     binding.constraintLayout.visibility = View.VISIBLE
                 }
                 else {
@@ -85,7 +81,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
             }
         })
 
-        viewPagerAdapter = GameViewPagerAdapter(object : viewPagerListener {
+        viewPagerAdapter = GameViewPagerAdapter(object : ViewPagerListener {
             override fun onItemClickedViewPager(game: Game) {
                 if (game.id != null){
                     val navigation = HomeFragmentDirections.actionHomeFragmentToDetailFragment(game.id)
@@ -124,8 +120,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
         var topThreeGame = ArrayList<Game>()
         var newThreeGame = addTopThreeGame(games,topThreeGame)
         initViewPager(newThreeGame)
-        println("setViewPAger")
-
     }
 
     //ilk 3 oyunu al
@@ -133,7 +127,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
         topThreeGame.add(data[0])
         topThreeGame.add(data[1])
         topThreeGame.add(data[2])
-        println("addTopThreeGame")
         return topThreeGame
     }
 
@@ -144,7 +137,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>(
         viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         viewPagerAdapter.setList(newThreeGame)
         viewPager2.adapter = viewPagerAdapter
-        println("initViewPager")
     }
 
 

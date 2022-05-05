@@ -1,8 +1,10 @@
 package com.example.appcentvideogames.presentation.detail
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.appcentvideogames.database.FavoriteGameDatabase
 import com.example.appcentvideogames.model.GameDetail
 import com.example.appcentvideogames.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,6 +34,18 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
                 onError.value = request.message
             }
         }
+    }
+
+    //database'e favoriye aldıgımız oyunu ekle
+    fun addFavoriteGameDB(context: Context, gameDetail: GameDetail){
+        val dao = FavoriteGameDatabase.invoke(context).favoriteGameDAO()
+        dao.insert(gameDetail)
+    }
+
+    //favoriden cıkardıgımız oyunu databaseden sil
+    fun deleteFavoriteGameDB(context: Context, gameDetail: GameDetail){
+        val dao = FavoriteGameDatabase.invoke(context).favoriteGameDAO()
+        dao.delete(gameDetail)
     }
 
 }

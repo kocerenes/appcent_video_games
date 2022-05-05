@@ -17,19 +17,20 @@
             android:layout_height="250dp"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/ivFavIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16sp"
-            android:background="@android:color/transparent"
+            android:layout_margin="10dp"
             android:clickable="true"
             android:focusable="true"
             android:padding="4dp"
-            android:src="@drawable/ic_favorite_border"
+            app:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="@id/ivGameImage"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
 
 
         <TextView

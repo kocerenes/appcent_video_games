@@ -12,7 +12,5 @@ data class Game(
     @SerializedName("rating")
     val rating: Double?,
     @SerializedName("background_image")
-    val imageUrl: String?,
-    @SerializedName("is_fav")
-    var isFav: Boolean = false
+    val imageUrl: String?
 )

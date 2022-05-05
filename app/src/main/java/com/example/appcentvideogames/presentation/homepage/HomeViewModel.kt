@@ -23,7 +23,6 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository):
         when(request){
             is NetworkResult.Success ->{
                 gameResponse.value = request.data
-                println("iewmodel success")
             }
             is NetworkResult.Error ->{
                 println(request.message.toString())

@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.appcentvideogames.R
 import com.example.appcentvideogames.model.Game
-import com.example.appcentvideogames.presentation.homepage.listener.viewPagerListener
+import com.example.appcentvideogames.presentation.homepage.listener.ViewPagerListener
 
-class GameViewPagerAdapter(private val listener: viewPagerListener) : RecyclerView.Adapter<GameViewPagerAdapter.ViewPagerViewHolder>() {
+class GameViewPagerAdapter(private val listener: ViewPagerListener) : RecyclerView.Adapter<GameViewPagerAdapter.ViewPagerViewHolder>() {
 
     private var games = ArrayList<Game>()
 
@@ -18,7 +18,7 @@ class GameViewPagerAdapter(private val listener: viewPagerListener) : RecyclerVi
 
         private val gameImage: ImageView = itemView.findViewById(R.id.viewPagerImageView)
 
-        fun bind(listener: viewPagerListener, game: Game) {
+        fun bind(listener: ViewPagerListener, game: Game) {
             Glide.with(itemView.context)
                 .load(game.imageUrl)
                 .into(gameImage)
