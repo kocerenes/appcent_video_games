@@ -1,5 +1,11 @@
 # appcent_video_games
 
+App GIF
+--------------
+<p align="center">
+  <img src="https://raw.githubusercontent.com/kocerenes/my_repo/main/gameapp.gif?token=GHSAT0AAAAAABQ567OGEEHSHLVXZ4ZSNFDEYVB5SYQ" alt="GIF" />
+</p>
+
 Libraries Used
 --------------
 * [Architecture][10] - Start with classes for managing your UI component lifecycle and handling data
