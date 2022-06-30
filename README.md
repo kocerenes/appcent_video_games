@@ -3,7 +3,7 @@
 App GIF
 --------------
 <p align="center">
-  <img src="https://raw.githubusercontent.com/kocerenes/my_repo/main/gameapp.gif?token=GHSAT0AAAAAABQ567OHQBGXDVFFBPNGUA5KYVUT2GA" alt="GIF" />
+  <img src="https://raw.githubusercontent.com/kocerenes/appcent_video_games/master/gif/gameapp.gif" alt="GIF" />
 </p>
 
 Libraries Used
